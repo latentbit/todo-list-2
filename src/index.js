@@ -3,6 +3,7 @@ import { UIController } from "./render.js";
 import "./styles.css";
 
 const projectDisplay = document.querySelector('.project-display');
+const closeProjectInspectionButton = document.querySelector('.close-project-button');
 
 let todo = storageController();
 let todoUI = UIController();
@@ -35,6 +36,9 @@ function projectEventHandler(e) {
         todo.removeProject(projectName);
         console.log(todo.storage);
     } else if (e.target.classList.contains('project')) {
-        console.log(e.target.dataset.projectName)
+        const projectName = e.target.dataset.projectName;
+        todoUI.showProjectInspection(projectName);
     }
 }
+
+closeProjectInspectionButton.addEventListener('click', todoUI.closeProjectInspection);

@@ -1,4 +1,5 @@
 import { storageController, Todo } from "./app.js";
+import "./styles.css"
 
 let todo = storageController();
 

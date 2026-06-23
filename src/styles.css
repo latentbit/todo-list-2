@@ -29,6 +29,28 @@ body > div {
     background-color: rgb(237, 237, 237);
 }
 
+.create-project-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 0.7em;
+    gap: 5px;
+    margin: auto;
+    margin-bottom: 20px;
+    border: none;
+    font-size: 0.9rem;
+}
+
+.create-project-button svg {
+    width: 1em;
+}
+
+.create-project-button:hover,
+.project:hover,
+button.remove-button:hover {
+    box-shadow: 0 0 0 100px inset rgba(0, 0, 0, 0.14);
+}
+
 /* JS */
 
 .project-display {

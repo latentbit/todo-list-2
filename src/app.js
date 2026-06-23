@@ -13,7 +13,15 @@ function storageController() {
         storage[name] = {};
     }
 
-    return {storage, addProject}
+    function removeProject(projectName) {
+        delete storage[projectName];
+    }
+
+    return {
+        storage, 
+        addProject, 
+        removeProject
+    }
 }
 
 export {storageController, Todo}

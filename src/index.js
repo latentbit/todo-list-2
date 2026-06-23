@@ -1,49 +1,40 @@
 import { storageController, Todo } from "./app.js";
-import "./styles.css"
+import { UIController } from "./render.js";
+import "./styles.css";
+
+const projectDisplay = document.querySelector('.project-display');
 
 let todo = storageController();
+let todoUI = UIController();
 
 // Projects
 todo.addProject('coding');
+todoUI.renderNewProject('coding');
+
 todo.addProject('school');
+todoUI.renderNewProject('school');
+
+todo.addProject('fitness');
+todoUI.renderNewProject('fitness');
+
+todo.addProject('reading');
+todoUI.renderNewProject('reading');
+
+todo.addProject('web-dev');
+todoUI.renderNewProject('web-dev');
+
 todo.addProject('personal');
+todoUI.renderNewProject('personal');
 
-// Coding tasks
-todo.storage.coding["Finish Todo App"] = new Todo(
-    "Finish Todo App",
-    "2026-06-30",
-    "Implement localStorage support"
-);
+projectDisplay.addEventListener('click', projectEventHandler);
 
-todo.storage.coding["Fix Webpack Config"] = new Todo(
-    "Fix Webpack Config",
-    "2026-06-25",
-    "Clean up build process"
-);
-
-// School tasks
-todo.storage.school["Math Homework"] = new Todo(
-    "Math Homework",
-    "2026-06-24",
-    "Chapter 8 exercises"
-);
-
-todo.storage.school["History Essay"] = new Todo(
-    "History Essay",
-    "2026-07-02",
-    "Draft first version"
-);
-
-// Personal tasks
-todo.storage.personal["Buy Journal"] = new Todo(
-    "Buy Journal",
-    "2026-06-28"
-);
-
-todo.storage.personal["Practice Piano"] = new Todo(
-    "Practice Piano",
-    "2026-06-24",
-    "30 minutes"
-);
-
-console.log(todo.storage);
+function projectEventHandler(e) {
+    if (e.target.classList.contains('remove-button')) {
+        const projectName = e.target.parentElement.dataset.projectName;
+        todoUI.removeProject(projectName);
+        todo.removeProject(projectName);
+        console.log(todo.storage);
+    } else if (e.target.classList.contains('project')) {
+        console.log(e.target.dataset.projectName)
+    }
+}

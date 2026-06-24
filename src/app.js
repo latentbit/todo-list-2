@@ -1,4 +1,4 @@
-class Todo {
+class Task {
     constructor(name, dueDate = undefined, description = undefined) {
         this.name = name;
         this.dueDate = dueDate;
@@ -29,4 +29,4 @@ function storageController() {
     }
 }
 
-export {storageController, Todo}
+export {storageController, Task}

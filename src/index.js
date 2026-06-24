@@ -1,4 +1,4 @@
-import { storageController, Todo } from "./app.js";
+import { storageController, Task } from "./app.js";
 import { UIController } from "./render.js";
 import "./styles.css";
 
@@ -14,9 +14,9 @@ let todoUI = UIController();
 todo.addProject('coding');
 todoUI.renderNewProject('coding');
 todo.storage.coding['Task1'] =
-    new Todo('Learn DOM', '2026-06-24', 'Query selectors');
+    new Task('Learn DOM', '2026-06-24', 'Query selectors');
 todo.storage.coding['Task2'] =
-    new Todo('Finish project', '2026-06-30', 'Todo app');
+    new Task('Finish project', '2026-06-30', 'Todo app');
 
 
 
@@ -28,9 +28,9 @@ todoUI.renderNewProject('school');
 todo.addProject('personal');
 todoUI.renderNewProject('personal');
 todo.storage.personal['Task1'] =
-    new Todo('Practice piano', '2026-06-24', '30 minutes');
+    new Task('Practice piano', '2026-06-24', '30 minutes');
 todo.storage.personal['Task2'] =
-    new Todo('Go for a walk');
+    new Task('Go for a walk');
 
 
 

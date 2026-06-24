@@ -2,7 +2,8 @@ import { storageController, Todo } from "./app.js";
 import { UIController } from "./render.js";
 import "./styles.css";
 
-const projectDisplay = document.querySelector('.project-display');
+const projectPage = document.querySelector('.left-page');
+const taskPage = document.querySelector('.right-page');
 const closeProjectInspectionButton = document.querySelector('.close-project-button');
 
 let todo = storageController();
@@ -33,18 +34,28 @@ todo.storage.personal['Task2'] =
 
 
 
-projectDisplay.addEventListener('click', projectEventHandler);
+projectPage.addEventListener('click', projectPageEventHandler);
 
-function projectEventHandler(e) {
+function projectPageEventHandler(e) {
     if (e.target.classList.contains('remove-button')) {
         const projectName = e.target.parentElement.dataset.projectName;
         todoUI.removeProject(projectName);
         todo.removeProject(projectName);
-        console.log(todo.storage);
     } else if (e.target.classList.contains('project')) {
         const projectName = e.target.dataset.projectName;
         todoUI.showProjectInspection(projectName);
         todoUI.showTasksOf(todo.storage[projectName]);
+    }
+}
+
+taskPage.addEventListener('click', taskPageEventHandler);
+
+function taskPageEventHandler(e) {
+    if (e.target.classList.contains('remove-button')) {
+        const taskName = e.target.parentElement.parentElement.dataset.name;
+        const projectName = document.querySelector('.right-page').dataset.inspectedProject;
+        todoUI.removeTask(taskName);
+        todo.removeTask(projectName, taskName);
     }
 }
 

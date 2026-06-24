@@ -33,7 +33,8 @@ body > div {
     background-color: rgb(237, 237, 237);
 }
 
-.create-project-button {
+.create-project-button,
+.create-task-button {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -50,6 +51,7 @@ body > div {
 }
 
 .create-project-button:hover,
+.create-task-button:hover,
 .project:hover,
 button.remove-button:hover,
 button.close-project-button:hover {
@@ -116,11 +118,12 @@ button.close-project-button:hover {
     margin-bottom: 15px;
 }
 
-.project .remove-button {
+.project .remove-button,
+.task .remove-button {
     height: 1.1rem;
     aspect-ratio: 1;
     text-align: center;
-    background-color: rgb(209, 75, 75);
+    background-color: rgba(255, 255, 255, 0);
     border: none;
     color: rgb(0, 0, 0);
 }

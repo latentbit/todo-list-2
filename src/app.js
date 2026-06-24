@@ -17,10 +17,15 @@ function storageController() {
         delete storage[projectName];
     }
 
+    function removeTask(projectName, taskName) {
+        delete storage[projectName][taskName];
+    }
+
     return {
         storage, 
         addProject, 
-        removeProject
+        removeProject,
+        removeTask
     }
 }
 

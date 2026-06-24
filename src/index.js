@@ -1,5 +1,6 @@
 import { storageController, Task } from "./app.js";
 import { UIController } from "./render.js";
+import {createDialogForm} from "./dialog.js"
 import "./styles.css";
 
 const projectPage = document.querySelector('.left-page');
@@ -45,6 +46,8 @@ function projectPageEventHandler(e) {
         const projectName = e.target.dataset.projectName;
         todoUI.showProjectInspection(projectName);
         todoUI.showTasksOf(todo.storage[projectName]);
+    } else if (e.target.dataset.todoType === 'project') {
+        createDialogForm('project');
     }
 }
 
@@ -56,6 +59,8 @@ function taskPageEventHandler(e) {
         const projectName = document.querySelector('.right-page').dataset.inspectedProject;
         todoUI.removeTask(taskName);
         todo.removeTask(projectName, taskName);
+    } else if (e.target.dataset.todoType === 'task') {
+        createDialogForm('task');
     }
 }
 

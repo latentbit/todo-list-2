@@ -171,10 +171,13 @@ button.close-project-button:hover {
 
 dialog {
     margin: auto;
-    top: 0;
     padding: 30px;
     width: min(350px, 50vw);
-    border: 3px solid rgb(0, 0, 0);
+    border: none;
+}
+
+dialog::backdrop {
+    backdrop-filter: blur(2px);
 }
 
 dialog h2 {

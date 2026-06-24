@@ -9,23 +9,29 @@ let todo = storageController();
 let todoUI = UIController();
 
 // Projects
+
 todo.addProject('coding');
 todoUI.renderNewProject('coding');
+todo.storage.coding['Task1'] =
+    new Todo('Learn DOM', '2026-06-24', 'Query selectors');
+todo.storage.coding['Task2'] =
+    new Todo('Finish project', '2026-06-30', 'Todo app');
+
+
 
 todo.addProject('school');
 todoUI.renderNewProject('school');
 
-todo.addProject('fitness');
-todoUI.renderNewProject('fitness');
 
-todo.addProject('reading');
-todoUI.renderNewProject('reading');
-
-todo.addProject('web-dev');
-todoUI.renderNewProject('web-dev');
 
 todo.addProject('personal');
 todoUI.renderNewProject('personal');
+todo.storage.personal['Task1'] =
+    new Todo('Practice piano', '2026-06-24', '30 minutes');
+todo.storage.personal['Task2'] =
+    new Todo('Go for a walk');
+
+
 
 projectDisplay.addEventListener('click', projectEventHandler);
 
@@ -38,6 +44,7 @@ function projectEventHandler(e) {
     } else if (e.target.classList.contains('project')) {
         const projectName = e.target.dataset.projectName;
         todoUI.showProjectInspection(projectName);
+        todoUI.showTasksOf(todo.storage[projectName]);
     }
 }
 

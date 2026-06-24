@@ -1,5 +1,7 @@
 export function UIController() {
     const projectDisplay = document.querySelector('.project-display');
+    const projectInspection = document.querySelector('.right-page');
+    const taskDisplay = projectInspection.querySelector('.task-display');
 
     function renderNewProject(projectName) {
         const project = document.createElement('div');
@@ -22,7 +24,7 @@ export function UIController() {
     }
 
     function removeProject(projectDatasetName) {
-        const projectToBeDeleted = document.querySelector(`[data-project-name=${projectDatasetName}]`);
+        const projectToBeDeleted = document.querySelector(`[data-project-name="${projectDatasetName}"]`);
         const projectInspectionTarget = document.querySelector('.right-page p.task-navigator');
         
         if (projectInspectionTarget.textContent === projectDatasetName) {
@@ -33,23 +35,60 @@ export function UIController() {
     }
 
     function closeProjectInspection() {
-        const projectInspection = document.querySelector('.right-page');
         projectInspection.style.display = 'none';
     }
 
     function showProjectInspection(projectName) {
         // show tasks as the user adds/removes them
         // reloads when the user clicks another project while inspecting the current project
-        const projectInspection = document.querySelector('.right-page');
         const nav = document.querySelector('.right-page p.task-navigator');
         nav.textContent = projectName;
         projectInspection.style.display = 'block';
+    }
+
+    function showTasksOf(projectObject) {
+        if (Object.keys(projectObject).length === 0) {
+            taskDisplay.innerHTML = '';
+            const p = document.createElement('p');
+            p.textContent = 'Wooop.. No tasks yet!';
+            taskDisplay.appendChild(p);
+        } else {
+            taskDisplay.innerHTML = '';
+            for (let task in projectObject) {
+                if (projectObject.propertyIsEnumerable(task)) {
+                    const taskName = projectObject[task].name;
+                    const taskDueDate = projectObject[task].dueDate || 'No due date.';
+                    const taskDescription = projectObject[task].description || '';
+
+                    const taskUI = document.createElement('div');
+                    taskUI.classList.add('task');
+                    taskUI.innerHTML = 
+                        `<div>
+                            <p class="task-name"></p>
+                            <p class="task-due-date"></p>
+                        </div>
+                        <p class="task-description"></p>`;
+
+                    const taskNameUI = taskUI.querySelector('.task-name');
+                    const taskDueDateUI = taskUI.querySelector('.task-due-date');
+                    const taskDescriptionUI = taskUI.querySelector('.task-description');
+
+                    taskNameUI.textContent = taskName;
+                    taskDueDateUI.textContent = taskDueDate;
+                    taskDescriptionUI.textContent = taskDescription;
+                    
+                    taskDisplay.appendChild(taskUI);
+                }
+            }
+        }
+        
     }
 
     return {
         renderNewProject,
         removeProject,
         showProjectInspection,
-        closeProjectInspection
+        closeProjectInspection,
+        showTasksOf
     }
 }

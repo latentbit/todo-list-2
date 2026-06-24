@@ -1,5 +1,5 @@
 class Todo {
-    constructor(name, dueDate, description = undefined) {
+    constructor(name, dueDate = undefined, description = undefined) {
         this.name = name;
         this.dueDate = dueDate;
         this.description = description;

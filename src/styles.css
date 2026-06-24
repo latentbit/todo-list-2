@@ -22,6 +22,8 @@ body > div {
     min-height: 400px;
     padding: 30px;
     color: rgb(54, 54, 54);
+    max-height: 500px;
+    overflow: auto;
 }
 
 .left-page h1 {
@@ -58,6 +60,7 @@ button.close-project-button:hover {
 
 .right-page {
     position: relative;
+    padding-top: 50px;
 }
 
 .right-page > .nav {
@@ -93,6 +96,8 @@ button.close-project-button:hover {
     margin-top: 20px;
 }
 
+/* PROJECT */
+
 .project h2 {
     font-weight: 400;
     text-transform: uppercase;
@@ -118,4 +123,43 @@ button.close-project-button:hover {
     background-color: rgb(209, 75, 75);
     border: none;
     color: rgb(0, 0, 0);
+}
+
+/* TASK */
+
+.task-display {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+}
+
+.task {
+    background-color: rgb(240, 240, 240);
+    padding: 5px;
+    border: 2px solid rgb(204, 204, 204);
+}
+
+.task > div {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.task .task-name {
+    font-weight: 500;
+}
+
+.task .task-name::after {
+    content: ':';
+}
+
+.task .task-due-date {
+    color: gray;
+    text-transform: uppercase;
+}
+
+.task .task-description {
+    border-top: 2px solid gray;
+    margin-top: 5px;
+    padding-top: 5px;
 }

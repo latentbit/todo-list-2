@@ -5,7 +5,6 @@ import "./styles.css";
 
 const projectPage = document.querySelector('.left-page');
 const taskPage = document.querySelector('.right-page');
-const closeProjectInspectionButton = document.querySelector('.close-project-button');
 
 let todo = storageController();
 let todoUI = UIController();
@@ -61,7 +60,7 @@ function taskPageEventHandler(e) {
         todo.removeTask(projectName, taskName);
     } else if (e.target.dataset.todoType === 'task') {
         createDialogForm('task');
+    } else if (e.target.classList.contains('close-project-button')); {
+        todoUI.closeProjectInspection();
     }
 }
-
-closeProjectInspectionButton.addEventListener('click', todoUI.closeProjectInspection);

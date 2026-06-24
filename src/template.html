@@ -50,5 +50,23 @@
             </div>
         </div>
     </div>
+    <dialog open>
+        <form id="task-creation" action="">
+            <h2>New task</h2>
+                <p>
+                    <label for="task-name">Task name</label>
+                    <input id="task-name" type="text" name="taskName" required autofocus>
+                </p>
+                <p>
+                    <label for="task-due-date">Task due date</label>
+                    <input id="task-due-date" name="taskdueDate" type="datetime-local">
+                </p>
+                <p>
+                    <label for="task-description">Task description</label>
+                    <input id="task-description" name="taskDescription" type="text">
+                </p>
+                <button type="submit">Create</button>
+        </form>
+    </dialog>
 </body>
 </html>

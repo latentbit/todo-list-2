@@ -166,3 +166,59 @@ button.close-project-button:hover {
     margin-top: 5px;
     padding-top: 5px;
 }
+
+/* Dialog form */
+
+dialog {
+    margin: auto;
+    top: 0;
+    padding: 30px;
+    width: min(350px, 50vw);
+    border: 3px solid rgb(0, 0, 0);
+}
+
+dialog h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+dialog h2::before,
+dialog h2::after {
+    content: "-";
+}
+
+form p {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    gap: 5px;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+}
+
+form input {
+    background-color: rgb(234, 234, 234);
+    border: none;
+    padding: 4px;
+    border-radius: 5px;
+}
+
+form label:has(+ input:required)::after {
+    content: " *";
+    color: rgb(190, 0, 0);
+}
+
+form button[type="submit"] {
+    background-color: black;
+    border: none;
+    padding: 5px 15px;
+    color: white;
+    font-size: 0.9rem;
+    border-radius: 5px;
+    display: block;
+    margin: auto;
+}
+
+form button[type="submit"]:hover {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.529);
+}

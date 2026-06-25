@@ -55,7 +55,7 @@ body > div {
 .create-task-button:hover,
 .project:hover,
 button.remove-button:hover,
-button.close-project-button:hover {
+button.close-project-inspection-button:hover {
     box-shadow: 0 0 0 100px inset rgba(0, 0, 0, 0.14);
 }
 

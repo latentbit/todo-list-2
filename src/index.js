@@ -11,20 +11,55 @@ export let todoUI = UIController();
 
 // Projects
 
-todo.addProject('coding');
-todo.storage.coding['Task1'] =
-    new Task('Learn DOM', '2026-06-24', 'Query selectors');
-todo.storage.coding['Task2'] =
-    new Task('Finish project', '2026-06-30', 'Todo app');
+todo.addProject('fitness');
+todo.storage.fitness['Task1'] =
+    new Task('10 pushups', '2026-06-26', 'Before breakfast');
+todo.storage.fitness['Task2'] =
+    new Task('Stretch');
 
-todo.addProject('school');
+todo.addProject('travel');
+todo.storage.travel['Task1'] =
+    new Task('Book hotel', '2026-08-01', 'Near beach');
+todo.storage.travel['Task2'] =
+    new Task('Pack clothes', '2026-08-10');
+todo.storage.travel['Task3'] =
+    new Task('Check passport');
 
-todo.addProject('personal');
-todo.storage.personal['Task1'] =
-    new Task('Practice piano', '2026-06-24', '30 minutes');
-todo.storage.personal['Task2'] =
-    new Task('Go for a walk');
+todo.addProject('shopping');
+todo.storage.shopping['Task1'] =
+    new Task('Buy milk');
+todo.storage.shopping['Task2'] =
+    new Task('Buy milk', '2026-06-26', 'For breakfast');
+    
+todo.addProject('movies');
+todo.storage.movies['Task1'] =
+    new Task('Watch Atlas', '2026-07-01');
+todo.storage.movies['Task2'] =
+    new Task('Watch Atlas', '2026-07-02');
 
+todo.addProject('ideas');
+todo.storage.ideas['Task1'] =
+    new Task('Build a note app');
+todo.storage.ideas['Task2'] =
+    new Task('Build a note app', '2027-01-01');
+
+todo.addProject('emptyProject');
+
+todo.addProject('weekend');
+todo.storage.weekend['Task1'] =
+    new Task('', '2026-06-28', '');
+
+todo.addProject('archive');
+todo.storage.archive['Task1'] =
+    new Task('Old task', '2000-01-01', 'Very old date');
+todo.storage.archive['Task2'] =
+    new Task('Future task', '2100-01-01', 'Very future date');
+
+todo.addProject('mixed');
+todo.storage.mixed['Task1'] =
+    new Task('Task with description only', undefined, 'Description');
+todo.storage.mixed['Task2'] =
+    new Task('Task with date only', '2026-12-31');
     
 todoUI.showProjects(todo.storage);
 

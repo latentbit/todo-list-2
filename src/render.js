@@ -2,36 +2,38 @@ export function UIController() {
     const projectDisplay = document.querySelector('.project-display');
     const projectInspection = document.querySelector('.right-page');
     const taskDisplay = projectInspection.querySelector('.task-display');
-    const projectInspectionTarget = document.querySelector('.right-page p.task-navigator');
+    const projectInspectionTarget = document.querySelector('.right-page p.project-navigator');
 
-    function renderNewProject(projectName) {
-        const project = document.createElement('div');
-        project.classList.add('project');
-        project.dataset.projectName = projectName;
-        project.setAttribute('title', 'Click to view project information ^-^');
+    function showProjects(storage) {
+        projectDisplay.innerHTML = '';
+        //This function is only activated when the user clicks a project UI, 
+        //so the storage always have at least one project.
+        for (let project in storage) {
+            if (storage.propertyIsEnumerable(project)) {
+                const projectUI = document.createElement('div');
+                projectUI.classList.add('project');
+                // The dataset is for the project inspection target to use
+                projectUI.dataset.projectName = project;
+                projectUI.setAttribute('title', 'Click to view project information ^-^');
 
-        const projectTitle = document.createElement('h2');
-        projectTitle.textContent = projectName;
+                const projectTitle = document.createElement('h2');
+                projectTitle.textContent = project;
 
-        const removeButton = document.createElement('button');
-        removeButton.classList.add('remove-button');
-        removeButton.setAttribute('aria-label', 'remove project');
-        removeButton.setAttribute('title', 'Remove project?')
-        removeButton.textContent = 'X';
+                const removeButton = document.createElement('button');
+                removeButton.classList.add('remove-button');
+                removeButton.setAttribute('aria-label', 'remove project');
+                removeButton.setAttribute('title', 'Remove project?')
+                removeButton.textContent = 'X';
 
-        project.appendChild(projectTitle);
-        project.appendChild(removeButton);
-        projectDisplay.appendChild(project);
-    }
-
-    function removeProject(projectDatasetName) {
-        const projectToBeDeleted = document.querySelector(`[data-project-name="${projectDatasetName}"]`);
-        
-        if (projectInspectionTarget.textContent === projectDatasetName) {
+                projectUI.appendChild(projectTitle);
+                projectUI.appendChild(removeButton);
+                projectDisplay.appendChild(projectUI);
+            }
+        }
+        // This one assume the underlying data has been updated before the UI
+        if (storage[projectInspectionTarget.textContent] === undefined) {
             closeProjectInspection();
         }
-
-        projectToBeDeleted.remove();
     }
 
     function closeProjectInspection() {
@@ -93,8 +95,7 @@ export function UIController() {
     }
 
     return {
-        renderNewProject,
-        removeProject,
+        showProjects,
         showProjectInspection,
         closeProjectInspection,
         showTasksOf,

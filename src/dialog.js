@@ -33,6 +33,8 @@ function createTaskForm() {
 function createDialogForm(todoType) {
     if (todoType !== 'project' && todoType !== 'task') return;
 
+    // Removes last dialog
+
     if (body.querySelector('dialog') !== null) {
         body.querySelector('dialog').remove();
     }
@@ -48,6 +50,66 @@ function createDialogForm(todoType) {
 
     body.appendChild(todoDialog);
     todoDialog.showModal();
+
+    return todoDialog;
 }
 
-export {createDialogForm}
+import {todo, todoUI} from "./index.js";
+import { Task } from "./app.js";
+
+function createCustomProject() {
+    // Show the modal for project creations, 
+    // Get the modal's form to handle submit events
+    const dialogElement = createDialogForm('project');
+    const form = dialogElement.querySelector('#project-creation');
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        let projectName = form.querySelector('#project-name').value;
+        projectName = (isValidString(projectName)) ? projectName : 'Project';
+        // Potential logic bug: If the new project's name is
+        //  the same as one in the storage, override the old one.
+        todo.addProject(projectName);
+        todoUI.showProjects(todo.storage);
+        dialogElement.close();
+    })
+}
+
+function createCustomTask() {
+    const dialogElement = createDialogForm('task');
+    const form = dialogElement.querySelector('#task-creation');
+    
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        let taskName = form.querySelector('#task-name').value;
+        taskName = (isValidString(taskName)) ? taskName : 'Task';
+
+        // If the user hasn't specified a date, it will return null
+        let taskDueDate = form.querySelector('#task-due-date'.value);
+        taskDueDate = (isValidDate(taskDueDate)) ? taskDueDate : undefined;
+
+        let taskDescription = form.querySelector('#task-description').value;
+        taskDescription = (isValidString(taskDescription)) ? taskDescription : undefined;
+
+        let projectName = document.querySelector('.right-page .nav > .project-navigator').textContent;
+        if (todo.storage[projectName] === undefined) return;
+
+        todo.storage[projectName][taskName] = new Task(taskName, taskDueDate, taskDescription);
+        todoUI.showTasksOf(todo.storage[projectName]);
+        dialogElement.close();
+    })
+}
+
+function isValidString(value) {
+    if (typeof value !== 'string') return false;
+    if (value.trim() === '') return false;
+    return true;
+}
+
+function isValidDate(date) {
+    const dateTest = new Date(date).getTime();
+    if (isNaN(dateTest)) return false;
+    return true;
+}
+
+export {createCustomProject, createCustomTask}

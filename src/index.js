@@ -1,13 +1,13 @@
 import { storageController, Task } from "./app.js";
 import { UIController } from "./render.js";
-import {createDialogForm} from "./dialog.js"
+import {createCustomTask, createCustomProject} from "./dialog.js";
 import "./styles.css";
 
 const projectPage = document.querySelector('.left-page');
 const taskPage = document.querySelector('.right-page');
 
-let todo = storageController();
-let todoUI = UIController();
+export let todo = storageController();
+export let todoUI = UIController();
 
 // Projects
 
@@ -40,7 +40,7 @@ function projectPageEventHandler(e) {
         todoUI.showProjectInspection(projectName);
         todoUI.showTasksOf(todo.storage[projectName]);
     } else if (e.target.dataset.todoType === 'project') {
-        createDialogForm('project');
+        createCustomProject('project');
     }
 }
 
@@ -53,7 +53,7 @@ function taskPageEventHandler(e) {
         todoUI.removeTask(taskName);
         todo.removeTask(projectName, taskName);
     } else if (e.target.dataset.todoType === 'task') {
-        createDialogForm('task');
+        createCustomTask('task');
     } else if (e.target.classList.contains('close-project-inspection-button')) {
         todoUI.closeProjectInspection();
     }

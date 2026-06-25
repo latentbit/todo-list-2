@@ -76,17 +76,17 @@ button.close-project-button:hover {
     justify-content: space-between;
 }
 
-.right-page > .nav > .task-navigator {
+.right-page > .nav > .project-navigator {
     color: black;
     padding: 3px 5px;
     font-size: 0.9rem;
 }
 
-.right-page > .nav > .task-navigator::after {
+.right-page > .nav > .project-navigator::after {
     content: " /";
 }
 
-.close-project-button {
+.close-project-inspection-button {
     background-color: rgb(209, 75, 75);
     color: rgb(0, 0, 0);
     border: none;

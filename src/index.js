@@ -54,7 +54,7 @@ function taskPageEventHandler(e) {
         todo.removeTask(projectName, taskName);
     } else if (e.target.dataset.todoType === 'task') {
         createDialogForm('task');
-    } else if (e.target.classList.contains('close-project-inspection-button')); {
+    } else if (e.target.classList.contains('close-project-inspection-button')) {
         todoUI.closeProjectInspection();
     }
 }

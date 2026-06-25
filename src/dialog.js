@@ -85,7 +85,7 @@ function createCustomTask() {
         taskName = (isValidString(taskName)) ? taskName : 'Task';
 
         // If the user hasn't specified a date, it will return null
-        let taskDueDate = form.querySelector('#task-due-date'.value);
+        let taskDueDate = form.querySelector('#task-due-date').value;
         taskDueDate = (isValidDate(taskDueDate)) ? taskDueDate : undefined;
 
         let taskDescription = form.querySelector('#task-description').value;

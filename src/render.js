@@ -59,7 +59,7 @@ export function UIController() {
             taskDisplay.innerHTML = '';
             for (let task in projectObject) {
                 if (projectObject.propertyIsEnumerable(task)) {
-                    const taskName = projectObject[task].name;
+                    const taskName = projectObject[task].name || 'Task';
                     const taskDueDate = projectObject[task].dueDate || 'No due date.';
                     const taskDescription = projectObject[task].description || '';
 

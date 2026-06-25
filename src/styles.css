@@ -31,6 +31,7 @@ body > div {
     text-transform: uppercase;
     text-align: center;
     background-color: rgb(237, 237, 237);
+    margin-bottom: 20px;
 }
 
 .create-project-button,

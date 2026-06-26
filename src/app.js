@@ -1,8 +1,21 @@
+function isValidString(value) {
+    if (typeof value !== 'string') return false;
+    if (value.trim() === '') return false;
+    return true;
+}
+
+function isValidDateString(dateString) {
+    if (typeof dateString !== 'string') return false;
+    const dateTest = new Date(dateString).getTime();
+    if (isNaN(dateTest)) return false;
+    return true;
+}
+
 class Task {
     constructor(name, dueDate = undefined, description = undefined) {
-        this.name = name;
-        this.dueDate = dueDate;
-        this.description = description;
+        this.name = isValidString(name) ? name : 'Task';
+        this.dueDate = isValidDateString(dueDate) ? dueDate : undefined;
+        this.description = isValidString(description) ? description : undefined;
     }
 }
 

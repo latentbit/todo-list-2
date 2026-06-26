@@ -75,7 +75,7 @@ export function UIController() {
             }
 
             for (let task of orderedProjectArray) {
-                const taskName = projectObject[task].name || 'Task';
+                const taskName = projectObject[task].name;
                 const taskDueDate = projectObject[task].dueDate || 'No due date.';
                 const taskDescription = projectObject[task].description || '';
 

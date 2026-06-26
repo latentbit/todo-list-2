@@ -11,55 +11,34 @@ let todoUI = UIController();
 
 // Projects
 
-todo.addProject('fitness');
-todo.storage.fitness['Task1'] =
-    new Task('10 pushups', '2026-06-26', 'Before breakfast');
-todo.storage.fitness['Task2'] =
-    new Task('Stretch');
+todo.addProject('sortEdgeCases');
 
-todo.addProject('travel');
-todo.storage.travel['Task1'] =
-    new Task('Book hotel', '2026-08-01', 'Near beach');
-todo.storage.travel['Task2'] =
-    new Task('Pack clothes', '2026-08-10');
-todo.storage.travel['Task3'] =
-    new Task('Check passport');
+todo.storage.sortEdgeCases['Task1'] =
+    new Task('Same date A', '2026-07-01');
 
-todo.addProject('shopping');
-todo.storage.shopping['Task1'] =
-    new Task('Buy milk');
-todo.storage.shopping['Task2'] =
-    new Task('Buy milk', '2026-06-26', 'For breakfast');
-    
-todo.addProject('movies');
-todo.storage.movies['Task1'] =
-    new Task('Watch Atlas', '2026-07-01');
-todo.storage.movies['Task2'] =
-    new Task('Watch Atlas', '2026-07-02');
+todo.storage.sortEdgeCases['Task2'] =
+    new Task('Same date B', '2026-07-01');
 
-todo.addProject('ideas');
-todo.storage.ideas['Task1'] =
-    new Task('Build a note app');
-todo.storage.ideas['Task2'] =
-    new Task('Build a note app', '2027-01-01');
+todo.storage.sortEdgeCases['Task3'] =
+    new Task('Same date C', '2026-07-01');
 
-todo.addProject('emptyProject');
+todo.storage.sortEdgeCases['Task4'] =
+    new Task('No deadline A');
 
-todo.addProject('weekend');
-todo.storage.weekend['Task1'] =
-    new Task('', '2026-06-28', '');
+todo.storage.sortEdgeCases['Task5'] =
+    new Task('No deadline B');
 
-todo.addProject('archive');
-todo.storage.archive['Task1'] =
-    new Task('Old task', '2000-01-01', 'Very old date');
-todo.storage.archive['Task2'] =
-    new Task('Future task', '2100-01-01', 'Very future date');
+todo.storage.sortEdgeCases['Task6'] =
+    new Task('Past task', '2020-01-01');
 
-todo.addProject('mixed');
-todo.storage.mixed['Task1'] =
-    new Task('Task with description only', undefined, 'Description');
-todo.storage.mixed['Task2'] =
-    new Task('Task with date only', '2026-12-31');
+todo.storage.sortEdgeCases['Task7'] =
+    new Task('Future task', '2100-01-01');
+
+todo.storage.sortEdgeCases['Task8'] =
+    new Task('Tomorrow', '2026-06-27');
+
+todo.storage.sortEdgeCases['Task9'] =
+    new Task('Today', '2026-06-26');
     
 todoUI.showProjects(todo.storage);
 
@@ -73,7 +52,7 @@ function projectPageEventHandler(e) {
     } else if (e.target.classList.contains('project')) {
         const projectName = e.target.dataset.projectName;
         todoUI.showProjectInspection(projectName);
-        todoUI.showTasksOf(todo.storage[projectName]);
+        todoUI.showTasksOf(todo.storage[projectName], todo.getOrderedTaskList([projectName]));
     } else if (e.target.dataset.todoType === 'project') {
         createCustomProject(todo, todoUI);
     }
@@ -93,3 +72,5 @@ function taskPageEventHandler(e) {
         todoUI.closeProjectInspection();
     }
 }
+
+todo.getOrderedTaskList('sortEdgeCases');

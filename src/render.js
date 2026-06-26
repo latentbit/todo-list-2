@@ -48,7 +48,7 @@ export function UIController() {
         projectInspection.style.display = 'block';
     }
 
-    function showTasksOf(projectObject) {
+    function showTasksOf(projectObject, orderedProjectArray) {
         if (Object.keys(projectObject).length === 0) {
             taskDisplay.innerHTML = '';
             const p = document.createElement('p');
@@ -57,33 +57,31 @@ export function UIController() {
             taskDisplay.appendChild(p);
         } else {
             taskDisplay.innerHTML = '';
-            for (let task in projectObject) {
-                if (projectObject.propertyIsEnumerable(task)) {
-                    const taskName = projectObject[task].name || 'Task';
-                    const taskDueDate = projectObject[task].dueDate || 'No due date.';
-                    const taskDescription = projectObject[task].description || '';
+            for (let task of orderedProjectArray) {
+                const taskName = projectObject[task].name || 'Task';
+                const taskDueDate = projectObject[task].dueDate || 'No due date.';
+                const taskDescription = projectObject[task].description || '';
 
-                    const taskUI = document.createElement('div');
-                    taskUI.classList.add('task');
-                    taskUI.dataset.name = task;
-                    taskUI.innerHTML = 
-                        `<div>
-                            <p class="task-name"></p>
-                            <p class="task-due-date"></p>
-                            <button class="remove-button" aria-label="remove task">X</button>
-                        </div>
-                        <p class="task-description"></p>`;
+                const taskUI = document.createElement('div');
+                taskUI.classList.add('task');
+                taskUI.dataset.name = task;
+                taskUI.innerHTML = 
+                    `<div>
+                        <p class="task-name"></p>
+                        <p class="task-due-date"></p>
+                        <button class="remove-button" aria-label="remove task">X</button>
+                    </div>
+                    <p class="task-description"></p>`;
 
-                    const taskNameUI = taskUI.querySelector('.task-name');
-                    const taskDueDateUI = taskUI.querySelector('.task-due-date');
-                    const taskDescriptionUI = taskUI.querySelector('.task-description');
+                const taskNameUI = taskUI.querySelector('.task-name');
+                const taskDueDateUI = taskUI.querySelector('.task-due-date');
+                const taskDescriptionUI = taskUI.querySelector('.task-description');
 
-                    taskNameUI.textContent = taskName;
-                    taskDueDateUI.textContent = taskDueDate;
-                    taskDescriptionUI.textContent = taskDescription;
-                    
-                    taskDisplay.appendChild(taskUI);
-                }
+                taskNameUI.textContent = taskName;
+                taskDueDateUI.textContent = taskDueDate;
+                taskDescriptionUI.textContent = taskDescription;
+                
+                taskDisplay.appendChild(taskUI);
             }
         }
         

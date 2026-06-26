@@ -11,34 +11,41 @@ let todoUI = UIController();
 
 // Projects
 
-todo.addProject('sortEdgeCases');
+// 1. Empty project (you already have logic for this)
+todo.addProject('emptyProject');
 
-todo.storage.sortEdgeCases['Task1'] =
-    new Task('Same date A', '2026-07-01');
+// 2. Normal mixed tasks
+todo.addProject('normalProject');
+todo.storage.normalProject['Task1'] = new Task('Buy groceries', '2026-06-30', 'Milk, eggs, bread');
+todo.storage.normalProject['Task2'] = new Task('Finish homework', '2026-07-02', 'Math exercises');
+todo.storage.normalProject['Task3'] = new Task('Call mom', '', 'No due date task');
 
-todo.storage.sortEdgeCases['Task2'] =
-    new Task('Same date B', '2026-07-01');
+// 3. Overdue + urgent + future mix
+todo.addProject('timeStressTest');
+todo.storage.timeStressTest['Task1'] = new Task('Overdue task', '2025-01-01', 'This is already dead');
+todo.storage.timeStressTest['Task2'] = new Task('Urgent task', new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString().split('T')[0], 'Due tomorrow');
+todo.storage.timeStressTest['Task3'] = new Task('Upcoming task', new Date(Date.now() + 10 * 24 * 60 * 60 * 1000).toISOString().split('T')[0], 'Due in ~10 days');
+todo.storage.timeStressTest['Task4'] = new Task('Far future task', '2027-01-01', 'Relax');
 
-todo.storage.sortEdgeCases['Task3'] =
-    new Task('Same date C', '2026-07-01');
+// 4. Same due date collisions (sorting test)
+todo.addProject('sameDateChaos');
+todo.storage.sameDateChaos['A'] = new Task('Task A', '2026-07-01');
+todo.storage.sameDateChaos['B'] = new Task('Task B', '2026-07-01');
+todo.storage.sameDateChaos['C'] = new Task('Task C', '2026-07-01');
 
-todo.storage.sortEdgeCases['Task4'] =
-    new Task('No deadline A');
+// 5. Missing/dirty data (this is where apps usually die)
+todo.addProject('dirtyData');
+todo.storage.dirtyData['X'] = new Task('', '', '');
+todo.storage.dirtyData['Y'] = new Task(null, null, null);
+todo.storage.dirtyData['Z'] = new Task('Weird task'); // missing fields
 
-todo.storage.sortEdgeCases['Task5'] =
-    new Task('No deadline B');
-
-todo.storage.sortEdgeCases['Task6'] =
-    new Task('Past task', '2020-01-01');
-
-todo.storage.sortEdgeCases['Task7'] =
-    new Task('Future task', '2100-01-01');
-
-todo.storage.sortEdgeCases['Task8'] =
-    new Task('Tomorrow', '2026-06-27');
-
-todo.storage.sortEdgeCases['Task9'] =
-    new Task('Today', '2026-06-26');
+// 6. Long text stress test (UI overflow check)
+todo.addProject('uiStress');
+todo.storage.uiStress['Long'] = new Task(
+  'This is a ridiculously long task name that should probably break your layout if you are not careful',
+  '2026-08-15',
+  'Lorem ipsum '.repeat(30)
+);
     
 todoUI.showProjects(todo.storage);
 

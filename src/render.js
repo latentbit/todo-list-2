@@ -57,12 +57,30 @@ export function UIController() {
             taskDisplay.appendChild(p);
         } else {
             taskDisplay.innerHTML = '';
+
+            function addUrgencyBasedStyling(taskDueDate, taskUI) {
+                const TWODAYS = 1.728e+8;
+                const TWOWEEKS = 1.21e+9;
+                if (taskDueDate === 'No due date.') {
+                    taskUI.classList.add('no-due-date');
+                } else if (new Date(taskDueDate) < Date.now()) {
+                    taskUI.classList.add('overdue');
+                } else if (Date.now() + TWODAYS > new Date(taskDueDate)) {
+                    taskUI.classList.add('urgent');
+                } else if (Date.now() + TWOWEEKS > new Date(taskDueDate)) {
+                    taskUI.classList.add('upcoming');
+                } else {
+                    taskUI.classList.add('future');
+                }
+            }
+
             for (let task of orderedProjectArray) {
                 const taskName = projectObject[task].name || 'Task';
                 const taskDueDate = projectObject[task].dueDate || 'No due date.';
                 const taskDescription = projectObject[task].description || '';
 
                 const taskUI = document.createElement('div');
+                addUrgencyBasedStyling(taskDueDate, taskUI);
                 taskUI.classList.add('task');
                 taskUI.dataset.name = task;
                 taskUI.innerHTML = 

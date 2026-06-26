@@ -79,5 +79,3 @@ function taskPageEventHandler(e) {
         todoUI.closeProjectInspection();
     }
 }
-
-todo.getOrderedTaskList('sortEdgeCases');

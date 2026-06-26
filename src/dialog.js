@@ -54,10 +54,7 @@ function createDialogForm(todoType) {
     return todoDialog;
 }
 
-import {todo, todoUI} from "./index.js";
-import { Task } from "./app.js";
-
-function createCustomProject() {
+function createCustomProject(todoControl, todoUIControl) {
     // Show the modal for project creations, 
     // Get the modal's form to handle submit events
     const dialogElement = createDialogForm('project');
@@ -69,13 +66,13 @@ function createCustomProject() {
         projectName = (isValidString(projectName)) ? projectName : 'Project';
         // Potential logic bug: If the new project's name is
         //  the same as one in the storage, override the old one.
-        todo.addProject(projectName);
-        todoUI.showProjects(todo.storage);
+        todoControl.addProject(projectName);
+        todoUIControl.showProjects(todoControl.storage);
         dialogElement.close();
     })
 }
 
-function createCustomTask() {
+function createCustomTask(todoControl, todoUIControl, taskClass) {
     const dialogElement = createDialogForm('task');
     const form = dialogElement.querySelector('#task-creation');
     
@@ -92,10 +89,11 @@ function createCustomTask() {
         taskDescription = (isValidString(taskDescription)) ? taskDescription : undefined;
 
         let projectName = document.querySelector('.right-page .nav > .project-navigator').textContent;
-        if (todo.storage[projectName] === undefined) return;
+        if (todoControl.storage[projectName] === undefined) return;
 
-        todo.storage[projectName][taskName] = new Task(taskName, taskDueDate, taskDescription);
-        todoUI.showTasksOf(todo.storage[projectName]);
+        todoControl.storage[projectName][taskName] = 
+            new taskClass(taskName, taskDueDate, taskDescription);
+        todoUIControl.showTasksOf(todoControl.storage[projectName]);
         dialogElement.close();
     })
 }

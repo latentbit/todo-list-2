@@ -6,8 +6,8 @@ import "./styles.css";
 const projectPage = document.querySelector('.left-page');
 const taskPage = document.querySelector('.right-page');
 
-export let todo = storageController();
-export let todoUI = UIController();
+let todo = storageController();
+let todoUI = UIController();
 
 // Projects
 
@@ -75,7 +75,7 @@ function projectPageEventHandler(e) {
         todoUI.showProjectInspection(projectName);
         todoUI.showTasksOf(todo.storage[projectName]);
     } else if (e.target.dataset.todoType === 'project') {
-        createCustomProject('project');
+        createCustomProject(todo, todoUI);
     }
 }
 
@@ -88,7 +88,7 @@ function taskPageEventHandler(e) {
         todoUI.removeTask(taskName);
         todo.removeTask(projectName, taskName);
     } else if (e.target.dataset.todoType === 'task') {
-        createCustomTask('task');
+        createCustomTask(todo, todoUI, Task);
     } else if (e.target.classList.contains('close-project-inspection-button')) {
         todoUI.closeProjectInspection();
     }

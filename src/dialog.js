@@ -93,7 +93,7 @@ function createCustomTask(todoControl, todoUIControl, taskClass) {
 
         todoControl.storage[projectName][taskName] = 
             new taskClass(taskName, taskDueDate, taskDescription);
-        todoUIControl.showTasksOf(todoControl.storage[projectName]);
+        todoUIControl.showTasksOf(todoControl.storage[projectName], todoControl.getOrderedTaskList(projectName));
         dialogElement.close();
     })
 }

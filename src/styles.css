@@ -226,3 +226,29 @@ form button[type="submit"] {
 form button[type="submit"]:hover {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.529);
 }
+
+/* Task urgency styling */
+
+.task.overdue {
+    border-left: 5px solid rgb(59, 59, 59);
+}
+
+.task.overdue .task-name {
+    text-decoration: line-through;
+}
+
+.task.urgent {
+    border-left: 5px solid red;
+}
+
+.task.upcoming {
+    border-left: 5px solid orange;
+}
+
+.task.future {
+    border-left: 5px solid rgb(0, 201, 0);
+}
+
+.task.no-deadline {
+    border-left: 5px solid gray;
+}
